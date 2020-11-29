@@ -2,11 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* npx tailwindcss build src/assets/tailwind.src.css -o src/assets/style.css */
+
 .animate {
   @apply transition duration-500 ease-in-out transform;
 }
 .animate:hover {
   @apply -translate-y-1 scale-100;
 }
+.navbar {
+  @apply shadow-md flex w-full justify-between items-center bg-white p-3 rounded-md mt-5 flex-col;
+}
 
-/* npx tailwindcss build src/assets/tailwind.src.css -o src/assets/style.css */
+@media (min-width: 768px) {
+  .navbar {
+    @apply flex-row;
+  }
+}
+
+.text-primary {
+  color: #6f64f8;
+}
+.bg-primary {
+  background-color: #6f64f8;
+}

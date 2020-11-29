@@ -32068,6 +32068,8 @@ video {
   animation: bounce 1s infinite;
 }
 
+/* npx tailwindcss build src/assets/tailwind.src.css -o src/assets/style.css */
+
 .animate {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
@@ -32090,7 +32092,34 @@ video {
   --tw-translate-y: -0.25rem;
 }
 
-/* npx tailwindcss build src/assets/tailwind.src.css -o src/assets/style.css */
+.navbar {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding: 0.75rem;
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    flex-direction: row;
+  }
+}
+
+.text-primary {
+  color: #6f64f8;
+}
+
+.bg-primary {
+  background-color: #6f64f8;
+}
 
 @media (min-width: 640px) {
   .sm\:container {
