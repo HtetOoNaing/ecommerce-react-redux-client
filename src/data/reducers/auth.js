@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
         case USER_LOADED :
             return {
                 ...state,
-                payload,
+                user: payload,
                 isAuthenticated: true,
                 loading: false
             }
@@ -86,13 +86,16 @@ export const register = ({name, email, password}) => async (dispatch) => {
         }
     }
     const body = JSON.stringify({name, email, password});
-
+    dispatch({
+        type: SET_LOADING,
+    })
     try {
         const res = await axios.post(`${URLDevelopment}/api/user/register`, body, config);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
-        })
+        });
+        dispatch(loadUser());
     } catch(error) {
         const errors = error.response.data.errors;
         if(errors) {
