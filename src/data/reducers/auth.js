@@ -1,9 +1,13 @@
 import axios from 'axios';
+import setAuthToken from '../../helpers/setAuthToken';
 import { URLDevelopment } from '../../helpers/URL';
 
 // Types
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const REGISTER_FAIL = 'REGISTER_FAIL';
+const USER_LOADED = 'USER_LOADED';
+const AUTH_ERROR = 'AUTH_ERROR';
+
 
 // initialState
 const initialState = {
@@ -16,6 +20,15 @@ const initialState = {
 export default function(state = initialState, action) {
     const { type, payload } = action;
     switch(type) {
+
+        case USER_LOADED :
+            return {
+                ...state,
+                payload,
+                isAuthenticated: true,
+                loading: false
+            }
+        
         case REGISTER_SUCCESS :
             localStorage.setItem('token', payload.token)
             return {
@@ -25,6 +38,7 @@ export default function(state = initialState, action) {
                 loading: false
             };
         case REGISTER_FAIL :
+        case AUTH_ERROR :
             localStorage.removeItem('token');
             return {
                 ...state,
@@ -37,6 +51,25 @@ export default function(state = initialState, action) {
 }
 
 // Actions
+
+export const loadUser = () => async(dispatch) => {
+    if(localStorage.token) {
+        setAuthToken(localStorage.token);
+    }
+    try {
+        const res = await axios.get(`${URLDevelopment}/api/user`);
+        dispatch({
+            type: USER_LOADED,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error.response);
+        dispatch({
+            type: AUTH_ERROR,
+        })
+    }
+}
+
 export const register = ({name, email, password}) => async (dispatch) => {
     // config header for axiso
     const config = {

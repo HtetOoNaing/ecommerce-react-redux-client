@@ -1,9 +1,25 @@
 
-function App() {
+// redux
+import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { loadUser } from './data/reducers/auth';
+import store from './data/store';
+import setAuthToken from './helpers/setAuthToken';
+import Routes from './routes';
+
+const App = () => {
+  if(localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  useEffect(() => {
+    store.dispatch(loadUser());
+  },[])
+
   return (
-    <div className="bg-gray-100">
-      hello
-    </div>
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   );
 }
 
