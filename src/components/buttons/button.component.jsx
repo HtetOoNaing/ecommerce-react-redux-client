@@ -5,7 +5,7 @@ const Button = ({ isButton = true, type="button", title, action, href, moreStyle
     return ( 
         <React.Fragment>
             {
-                isButton ? <button type={type} className={style} > {title} </button> : <Link to={href} className={style} > {title} </Link>
+                isButton ? <button type={type} onClick={action} className={style} > {title} </button> : <Link to={href} className={style} > {title} </Link>
             }
         </React.Fragment>
      );

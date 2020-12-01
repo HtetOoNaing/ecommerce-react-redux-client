@@ -8,6 +8,7 @@ const REGISTER_FAIL = 'REGISTER_FAIL';
 const USER_LOADED = 'USER_LOADED';
 const AUTH_ERROR = 'AUTH_ERROR';
 const LOGOUT = 'LOGOUT';
+const SET_LOADING = 'SET_LOADING';
 
 
 // initialState
@@ -38,6 +39,11 @@ export default function(state = initialState, action) {
                 isAuthenticated: true,
                 loading: false
             };
+        case SET_LOADING :
+            return {
+                ...state,
+                loading: true
+            }
         case REGISTER_FAIL :
         case AUTH_ERROR :
         case LOGOUT :
