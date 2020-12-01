@@ -7,6 +7,7 @@ const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const REGISTER_FAIL = 'REGISTER_FAIL';
 const USER_LOADED = 'USER_LOADED';
 const AUTH_ERROR = 'AUTH_ERROR';
+const LOGOUT = 'LOGOUT';
 
 
 // initialState
@@ -39,6 +40,7 @@ export default function(state = initialState, action) {
             };
         case REGISTER_FAIL :
         case AUTH_ERROR :
+        case LOGOUT :
             localStorage.removeItem('token');
             return {
                 ...state,
@@ -94,4 +96,10 @@ export const register = ({name, email, password}) => async (dispatch) => {
             type: REGISTER_FAIL,
         })
     }
+}
+
+export const logout = () => dispatch => {
+    dispatch({
+        type : LOGOUT
+    })
 }
